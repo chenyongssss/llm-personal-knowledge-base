@@ -1,5 +1,7 @@
 # LLM Personal Knowledge Base
 
+![LLM Personal Knowledge Base banner](assets/banner.png)
+
 > A source-backed personal research wiki built with **Codex + Obsidian**.
 
 Turn papers, PDFs, web captures, and research questions into a durable Markdown knowledge base instead of letting them disappear into temporary chats.
