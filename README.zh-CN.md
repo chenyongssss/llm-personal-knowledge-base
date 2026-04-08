@@ -231,4 +231,4 @@ python scripts/lint_wiki.py
 
 ---
 
-如果你更希望对外发布，请优先使用英文版 [`README.md`](README.md)，中文说明可作为互补文档保留在仓库中。
+
