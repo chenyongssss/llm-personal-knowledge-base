@@ -1,20 +1,51 @@
 # LLM Personal Knowledge Base
 
-A source-backed personal knowledge system for research-heavy workflows, built around **Codex + Obsidian**.
+> A source-backed personal research wiki built with **Codex + Obsidian**.
 
-This project is not a generic note dump and not a chat transcript archive. It is a structured vault for turning papers, PDFs, web captures, and question-driven synthesis into a durable, inspectable, and cross-linked knowledge base.
+Turn papers, PDFs, web captures, and research questions into a durable Markdown knowledge base instead of letting them disappear into temporary chats.
 
-## What this project is for
+## Why this exists
 
-Most AI-assisted reading workflows have a failure mode: useful insights stay trapped inside temporary chats.
+Most AI-assisted reading workflows have the same failure mode: useful ideas are generated, but they remain trapped inside ephemeral conversations.
 
-This repository is designed to solve that by separating:
+This project is designed to make research knowledge:
 
-- **raw source material** from
-- **agent-maintained wiki pages** from
-- **operational logs and navigation pages**.
+- **source-backed** — raw material stays separate from synthesis;
+- **maintainable** — topic and entity pages get updated over time instead of duplicated;
+- **queryable** — questions can be answered from accumulated notes;
+- **auditable** — operational updates are tracked in `index.md` and `log.md`;
+- **portable** — everything lives in plain Markdown inside an Obsidian-friendly vault.
 
-The intended result is a personal knowledge base that can:
+## Who this is for
+
+This repository is especially useful for people who:
+
+- read papers regularly;
+- use Obsidian for long-term note organization;
+- want AI to help maintain knowledge structures, not just generate one-off summaries;
+- care about evidence boundaries and reusable synthesis.
+
+## Quick start
+
+```bash
+# 1. Put a new source into inbox/
+# 2. Optionally normalize the filename
+python scripts/new_source.py inbox/some-paper.pdf --move
+
+# 3. Ask Codex to ingest it and update the vault
+# 4. Run a structural check when needed
+python scripts/lint_wiki.py
+```
+
+## What you get
+
+This repository separates:
+
+- **raw source material**;
+- **agent-maintained wiki pages**;
+- **operational logs, templates, and navigation pages**.
+
+The result is a personal knowledge base that can:
 
 - absorb new papers incrementally;
 - preserve evidence boundaries;
