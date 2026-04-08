@@ -39,6 +39,10 @@ python scripts/new_source.py inbox/some-paper.pdf --move
 python scripts/lint_wiki.py
 ```
 
+## What it looks like
+
+![LLM Personal Knowledge Base screenshot](assets/screenshot-overview.png)
+
 ## What you get
 
 This repository separates:
