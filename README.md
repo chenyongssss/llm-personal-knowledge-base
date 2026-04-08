@@ -43,6 +43,29 @@ python scripts/lint_wiki.py
 
 ![LLM Personal Knowledge Base screenshot](assets/screenshot-overview.png)
 
+## Example workflow
+
+A typical end-to-end loop looks like this:
+
+1. **Drop a source into `inbox/`**  
+   Example: a new paper PDF or an abstract snapshot.
+2. **Normalize and import the source**  
+   Use `scripts/new_source.py` if you want predictable filenames inside `raw/sources/`.
+3. **Ask Codex to ingest it**  
+   Codex creates one `source-note`, updates related `topic` / `entity` / `overview` pages, then refreshes `index.md` and `log.md`.
+4. **Ask questions against the vault**  
+   Instead of re-reading everything from scratch, query the accumulated wiki.
+5. **Promote durable answers into `wiki/analyses/`**  
+   If a comparison, synthesis, or conclusion is likely to matter again, store it as a permanent analysis page.
+6. **Run lint to keep the vault healthy**  
+   Use `scripts/lint_wiki.py` to catch missing metadata, broken links, and structural issues.
+
+In short:
+
+```text
+inbox/ -> raw/sources/ -> source-note -> topic/entity pages -> analysis -> ongoing maintenance
+```
+
 ## What you get
 
 This repository separates:
