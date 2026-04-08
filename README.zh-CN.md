@@ -1,24 +1,49 @@
 # LLM Personal Knowledge Base
 
-这是一个围绕 **Codex + Obsidian** 搭建的、面向研究场景的个人知识库模板。
+![LLM Personal Knowledge Base banner](assets/banner.png)
 
-它不是普通笔记堆，也不是聊天记录归档，而是一个强调**来源可追溯、结构可维护、知识可持续积累**的本地 wiki。
+> 一个基于 **Codex + Obsidian** 的、面向研究工作流的个人知识库 / research wiki。
 
-## 这个项目解决什么问题
+把论文、网页、资料整理和研究问答，逐步沉淀成一个可维护、可追溯、可持续更新的 Markdown 知识库，而不是让它们停留在临时聊天记录里。
+
+## 为什么做这个项目
 
 很多 AI 辅助阅读流程都有同一个问题：
 
-- 论文看完了；
-- 对话里也有不少好结论；
+- 当下总结得很好；
+- 聊天里也有不少有价值的结论；
 - 但这些内容最后没有沉淀成长期可复用的知识。
 
-这个项目的目标，就是把“临时对话里的理解”逐步编译成一个长期可维护的知识库。
+这个项目就是为了解决这个问题：把“临时对话里的理解”逐步编译成一个长期可维护的知识库。
 
-它把整个流程拆成三层：
+它强调让研究知识变得：
 
-1. **原始资料层**：PDF、网页快照、Markdown 导出等源文件；
-2. **知识页层**：由 agent 维护的 source-note、topic、entity、analysis 页面；
-3. **运维层**：索引、日志、模板和脚本，保证这个库长期可维护。
+- **来源可追溯** —— 原始资料和综合结论分开保存；
+- **结构可维护** —— topic / entity 页面会被后续来源持续更新；
+- **可持续提问** —— 后续问题可以直接基于已有 wiki 继续生长；
+- **可审阅** —— 更新过程会写入 `index.md` 和 `log.md`；
+- **可移植** —— 全部内容都保持在 Markdown + Obsidian 友好的结构里。
+
+## 适合谁
+
+这个项目尤其适合：
+
+- 需要长期读论文的人；
+- 使用 Obsidian 但不想让笔记越来越散的人；
+- 想让 AI 不只是“帮忙总结”，而是“帮忙维护知识结构”的人；
+- 在意证据边界、来源可追踪和长期复用的人。
+
+## 快速开始
+
+```bash
+# 1. 把新资料放进 inbox/
+# 2. 如果需要，先规范文件名
+python scripts/new_source.py inbox/some-paper.pdf --move
+
+# 3. 让 Codex ingest 并更新 vault
+# 4. 需要时运行结构检查
+python scripts/lint_wiki.py
+```
 
 ## 核心思路
 
@@ -60,6 +85,10 @@
     ├── analyses/             # 问题驱动的长期分析页
     └── glossaries/           # 术语页
 ```
+
+## 现在长什么样
+
+![LLM Personal Knowledge Base screenshot](assets/screenshot-overview.png)
 
 ## 各部分分别做什么
 
@@ -107,6 +136,29 @@ Append-only 操作日志。
 - refactor。
 
 这样可以追踪这个知识库是如何一步步长出来的。
+
+## 示例工作流
+
+一个典型的端到端流程可以这样理解：
+
+1. **把新来源放进 `inbox/`**  
+   例如一篇 PDF 论文、一个 arXiv 摘要快照、或一份网页 Markdown 导出。
+2. **规范化并导入来源**  
+   如果你希望 `raw/sources/` 里的文件名稳定统一，可以先运行 `scripts/new_source.py`。
+3. **让 Codex ingest**  
+   Codex 负责创建一篇 `source-note`，并更新相关 `topic` / `entity` / `overview` 页面，同时刷新 `index.md` 和 `log.md`。
+4. **直接基于 vault 提问**  
+   后续问题不必每次都从原文重来，而是优先建立在已有 wiki 之上。
+5. **把长期有价值的回答沉淀到 `wiki/analyses/`**  
+   如果一个比较、结论或综合判断未来还会用到，就把它写成 analysis 页面。
+6. **定期运行 lint 保持结构健康**  
+   用 `scripts/lint_wiki.py` 检查缺失元数据、断链和结构问题。
+
+简化成一行就是：
+
+```text
+inbox/ -> raw/sources/ -> source-note -> topic/entity pages -> analysis -> 持续维护
+```
 
 ## 推荐工作流
 
